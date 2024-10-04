@@ -8,19 +8,19 @@
 body {
   font-family: 'Open Sans', serif;
   font-size: 16px;
-  line-height: 1.6;
   margin: 0;
   padding: 0;
 }
 
 main {
+  background-color: white;
   margin: 0 auto;
   max-width: 1200px;
   padding: 20px;
 }
 
 nav {
-  background-color: #444;
+  background-color: rgb(37, 37, 58);
   color: #fff;
   padding: 2px 0;
   text-align: center;
@@ -48,7 +48,28 @@ a {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 10px;
+  padding: 15px 0;
   text-align: center;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#vehicle-display section {
+  position: relative;
+  color: rgb(30, 169, 255);
+  background-color: rgba(255, 255, 255, 0.26);
+  padding: 5px;
+  width: 40%;
+}
+
+#vehicle-display section a {
+  background-color: rgb(30, 169, 255);
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  padding: 10px;
+}
+
+#vehicle-display picture {
+  background-color: black;
+  padding: 10px;
+  width: 100%;
 }
