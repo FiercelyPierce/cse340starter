@@ -56,10 +56,14 @@ a {
   display: flex;
   flex-direction: column;
   text-align: center;
+  padding: 10px 5px;
 }
 .upgrades img {
+  height: auto;
   width: 100%;
   background-color: rgb(30, 169, 255);
+  border: #000 1px solid;
+  padding: 0 40px;
 }
 
 #top-header {
@@ -74,13 +78,23 @@ a {
 #vehicle-display section {
   position: relative;
   color: rgb(30, 169, 255);
-  background-color: rgba(255, 255, 255, 0.26);
+  background-color: rgba(255, 255, 255, 0.445);
   padding: 5px;
-  width: 200px;
-  height: 200px;
+  font-size: small;
+  width: 175px;
+  height: 150px;
+  z-index: 1;
+}
+#vehicle-display section h3 {
+  font-size: 1.5em;
+  font-weight: 700;
+  margin: 0;
 }
 #vehicle-display ul {
   list-style-type: none;
+  padding: 0;
+}
+#vehicle-display li {
   padding: 0;
 }
 #vehicle-display section a {
@@ -90,7 +104,8 @@ a {
   padding: 10px;
 }
 #vehicle-display picture {
-  position: relative;
+  position: absolute;
+  top: 200px;
 }
 #vehicle-display img {
   width: 100%;
