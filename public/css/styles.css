@@ -9,6 +9,7 @@ body {
   font-size: 16px;
   margin: 0;
   padding: 0;
+  background-color: black;
 }
 main {
   background-color: white;
@@ -44,6 +45,10 @@ a {
   font-weight: 700;
 }
 
+.reviews {
+  padding: 20px 0;
+}
+
 .upgrades * {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -66,10 +71,16 @@ a {
   padding: 0 40px;
 }
 
+#wrapper {
+  background-color: white;
+  padding: 10px;
+}
+
 #top-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  background-color: white;
   padding: 15px 0;
   text-align: center;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -79,10 +90,10 @@ a {
   position: relative;
   color: rgb(30, 169, 255);
   background-color: rgba(255, 255, 255, 0.445);
-  padding: 5px;
+  padding: 10px;
   font-size: small;
-  width: 175px;
-  height: 150px;
+  max-width: 35%;
+  max-height: 45%;
   z-index: 1;
 }
 #vehicle-display section h3 {
@@ -104,9 +115,37 @@ a {
   padding: 10px;
 }
 #vehicle-display picture {
-  position: absolute;
-  top: 200px;
+  position: relative;
+  top: -120px;
 }
 #vehicle-display img {
   width: 100%;
+}
+
+@media screen and (min-width: 620px) {
+  #wrapper {
+    margin: 20px auto;
+    max-width: 840px;
+    border: rgb(30, 169, 255) 5px solid;
+    border-radius: 6px;
+  }
+
+  #vehicle-display section {
+    font-size: medium;
+    margin: 0 0 0 100px;
+  }
+
+  #vehicle-display picture {
+    right: -100px;
+  }
+
+  #vehicle-display img {
+    max-width: 70%;
+  }
+
+  #vehicle-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+  }
 }
