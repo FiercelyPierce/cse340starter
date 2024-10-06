@@ -144,8 +144,8 @@ a {
   }
 
   #vehicle-details {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 10px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
   }
 }
