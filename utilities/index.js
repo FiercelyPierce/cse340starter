@@ -70,7 +70,7 @@ Util.buildDetailGrid = async function(data){
     + new Intl.NumberFormat('en-US').format(data[0].inv_price) + '</li>'
     detail += '<li><strong>Year:</strong> ' + data[0].inv_year + '</li>'
     detail += '<li><strong>Color:</strong> ' + data[0].inv_color + '</li>'
-    detail += '<li><strong>Miles:</strong> ' + data[0].inv_miles + '</li>'
+    detail += '<li><strong>Mileage:</strong> ' + new Intl.NumberFormat('en-US').format(data[0].inv_miles) + '</li>'
     detail += '</ul>'
     detail += '<p>' + data[0].inv_description + '</p>'
     detail += '</div>'
