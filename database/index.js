@@ -13,20 +13,19 @@ if (process.env.NODE_ENV == "development") {
     ssl:  false
   })
 
-// Added for troubleshooting queries
-// during development
-module.exports = {
-  async query(text, params) {
-    try {
-      const res = await pool.query(text, params)
-      console.log("executed query", { text })
-      return res
-    } catch (error) {
-      console.error("error in query", { text })
-      throw error
-    }
-  },
-}
+  // Added for troubleshooting queries
+  // during development
+  module.exports = {
+    async query(text, params) {
+      try {
+        const res = await pool.query(text, params)
+        return res
+      } catch (error) {
+        console.error("error in query", { text })
+        throw error
+      }
+    },
+  }
 } else {
   pool = new Pool({
     connectionString: process.env.DATABASE_URL,
