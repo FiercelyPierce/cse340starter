@@ -43,6 +43,17 @@ a {
   text-decoration: none;
 }
 
+input:required:invalid, input:focus:invalid {
+  background-image: url(/images/invalid.png);
+  background-position: right top;
+  background-repeat: no-repeat;
+}
+input:required:valid {
+  background-image: url(/images/valid.png);
+  background-position: right top;
+  background-repeat: no-repeat;
+}
+
 .siteName {
   font-size: 2em;
   font-weight: 700;
