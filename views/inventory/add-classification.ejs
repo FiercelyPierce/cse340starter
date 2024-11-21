@@ -1,0 +1,23 @@
+<% if (title) { %>
+  <h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<%- messages() %>
+
+<div id="container">
+  <form id="addClassForm" action="/inventory/add-classification" method="post">
+    <div>
+      <label for="add-classification"></label>
+      <input 
+        type="text"
+        id="add-classification"
+        name="add-classification"
+        required
+        pattern="^[a-zA-Z0-9]{3,50}$"
+      >
+    </div>
+    <button type="submit">Add Classification</button>
+  </form>
+</div>
