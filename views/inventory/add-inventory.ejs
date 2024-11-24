@@ -1,0 +1,51 @@
+<% if (title) { %>
+  <h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<%- messages() %>
+
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
+<div id="container">
+  <form id="addInventoryForm" action="/inv/add-inventory" method="post">
+    <div>
+      <label for="add-inventory">Inventory</label>
+      <input 
+        type="text"
+        id="add-inventory"
+        name="add-inventory"
+        required
+        pattern="^[a-zA-Z0-9]{3,50}$"
+      >
+    </div>
+    <div>
+      <label for="add-classification">Classification</label>
+      <select 
+        id="add-classification"
+        name="add-classification"
+        required
+      >
+        <option value="">Select Classification</option>
+      </select>
+    </div>
+    <div>
+      <label for="add-quantity">Quantity</label>
+      <input 
+        type="number"
+        id="add-quantity"
+        name="add-quantity"
+        required
+        min="1"
+        max="1000"
+      >
+    </div>
+    <button type="submit">Add Inventory</button>
+  </form>

@@ -6,14 +6,22 @@
 
 <%- messages() %>
 
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
 <div id="container">
-  <form id="addClassForm" action="/inventory/add-classification" method="post">
+  <form id="addClassForm" action="/inv/add-classification" method="post">
     <div>
       <label for="add-classification"></label>
       <input 
         type="text"
-        id="add-classification"
-        name="add-classification"
+        id="classification_name"
+        name="classification_name"
         required
         pattern="^[a-zA-Z0-9]{3,50}$"
       >

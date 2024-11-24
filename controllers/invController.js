@@ -1,3 +1,4 @@
+const e = require("connect-flash")
 const invModel = require("../models/inventory-model")
 const utilities = require("../utilities/")
 
@@ -53,7 +54,101 @@ invCont.buildAddClassification = async function (req, res, next) {
   res.render("./inventory/add-classification", {
     title: "Add Classification",
     nav,
+    errors: null,
   })
+}
+
+/* ***************************
+ *  Process add classification
+ * ************************** */
+invCont.processAddClassification = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const { classification_name } = req.body
+  const data = await invModel.insertClassification(classification_name)
+
+  if (data) {
+    req.flash(
+      "notice", 
+      `${classification_name} classification added successfully.`
+    )
+    res.status(201).render("/inv",{
+      title: "Inventory Management",
+      nav,
+      errors: null,
+    })
+  } else {
+    req.flash(
+      "notice", 
+      `Sorry, there was an error adding the ${classification_name} classification.`
+    )
+    res.status(500).render("/inv", {
+      title: "Inventory Management",
+      nav,
+      errors: null,
+    })
+  }
+}
+
+/* ***************************
+ *  Build add inventory view
+ * ************************** */
+invCont.buildAddInventory = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("./inventory/add-inventory", {
+    title: "Add Inventory",
+    nav,
+    errors: null,
+  })
+}
+
+/* ***************************
+ *  Process add inventory
+ * ************************** */
+invCont.processAddInventory = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const {
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_color,
+    inv_price,
+    inv_condition,
+    classification_id,
+    inv_thumbnail,
+    inv_description,
+  } = req.body
+  const data = await invModel.insertInventory(
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_color,
+    inv_price,
+    inv_condition,
+    classification_id,
+    inv_thumbnail,
+    inv_description
+  )
+  if (data.rowCount == 1) {
+    req.flash(
+      "notice", 
+      "Inventory added successfully."
+    )
+    res.status(201).render("/inv", {
+      title: "Inventory Management",
+      nav,
+      errors: null,
+    })
+  } else {
+    req.flash(
+      "notice", 
+      "Sorry, there was an error adding the inventory."
+    )
+    res.status(500).render("/inv", {
+      title: "Inventory Management",
+      nav,
+      errors: null,
+    })
+  }
 }
 
 
