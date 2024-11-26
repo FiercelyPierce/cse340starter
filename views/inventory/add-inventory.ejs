@@ -15,7 +15,7 @@
 <% } %>
 
 <div id="container">
-  <form id="addInventoryForm" action="/inv/add-inventory" method="post">
+  <form id="addInvForm" action="/inv/add-inventory" method="post">
     <div>
       <label for="add-inventory">Inventory</label>
       <input 
@@ -28,13 +28,7 @@
     </div>
     <div>
       <label for="add-classification">Classification</label>
-      <select 
-        id="add-classification"
-        name="add-classification"
-        required
-      >
-        <option value="">Select Classification</option>
-      </select>
+      <%- classifications %>
     </div>
     <div>
       <label for="add-quantity">Quantity</label>

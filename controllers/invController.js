@@ -26,12 +26,12 @@ invCont.buildByClassificationId = async function (req, res, next) {
 invCont.buildByVehicleDetail = async function (req, res, next) {
   const inv_id = req.params.invId
   const data = await invModel.getVehicleDetailById(inv_id)
-  const grid = await utilities.buildDetailGrid(data)
+  const detail = await utilities.buildDetailGrid(data)
   let nav = await utilities.getNav()
   res.render("./inventory/detail", {
     title: data[0].inv_make + " " + data[0].inv_model,
     nav,
-    grid,
+    detail,
   })
 }
 
@@ -71,7 +71,7 @@ invCont.processAddClassification = async function (req, res, next) {
       "notice", 
       `${classification_name} classification added successfully.`
     )
-    res.status(201).render("/inv",{
+    res.status(201).render("./inventory/management",{
       title: "Inventory Management",
       nav,
       errors: null,
@@ -81,7 +81,7 @@ invCont.processAddClassification = async function (req, res, next) {
       "notice", 
       `Sorry, there was an error adding the ${classification_name} classification.`
     )
-    res.status(500).render("/inv", {
+    res.status(500).render("./inventory/add-classification", {
       title: "Inventory Management",
       nav,
       errors: null,
@@ -94,9 +94,11 @@ invCont.processAddClassification = async function (req, res, next) {
  * ************************** */
 invCont.buildAddInventory = async function (req, res, next) {
   let nav = await utilities.getNav()
+  let classifications = await invModel.getClassifications()
   res.render("./inventory/add-inventory", {
     title: "Add Inventory",
     nav,
+    classifications,
     errors: null,
   })
 }
