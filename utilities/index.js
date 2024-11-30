@@ -1,5 +1,7 @@
 const invModel = require("../models/inventory-model")
 const Util = {}
+const jwt = require("jsonwebtoken")
+require("dotenv").config()
 
 /* ************************
  * Constructs the nav HTML unordered list
@@ -25,8 +27,8 @@ Util.getNav = async function (req, res, next) {
 }
 
 /* **************************************
-* Build the classification view HTML
-* ************************************ */
+ * Build the classification view HTML
+ * ************************************ */
 Util.buildClassificationGrid = async function(data){
   let grid
   if(data.length > 0){
@@ -58,8 +60,8 @@ Util.buildClassificationGrid = async function(data){
 }
 
 /* **************************************
-* Build the vehicle detail view HTML
-* ************************************ */
+ * Build the vehicle detail view HTML
+ * ************************************ */
 Util.buildDetailGrid = async function(data){
   let detail
     detail = '<div id="inv-detail">'
@@ -78,8 +80,8 @@ Util.buildDetailGrid = async function(data){
 }
 
 /* **************************************
-* Build the classification list HTML
-* ************************************ */
+ * Build the classification list HTML
+ * ************************************ */
 Util.buildClassificationList = async function (classification_id = null) {
   let data = await invModel.getClassifications()
   let classificationList =
@@ -105,5 +107,42 @@ Util.buildClassificationList = async function (classification_id = null) {
  * General Error Handling
  **************************************** */
 Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
+
+
+/* ****************************************
+ * Middleware to check token validity
+ **************************************** */
+Util.checkJWTToken = (req, res, next) => {
+  if (req.cookies.jwt) {
+   jwt.verify(
+    req.cookies.jwt,
+    process.env.ACCESS_TOKEN_SECRET,
+    function (err, accountData) {
+     if (err) {
+      req.flash("Please log in")
+      res.clearCookie("jwt")
+      return res.redirect("/account/login")
+     }
+     res.locals.accountData = accountData
+     res.locals.loggedin = 1
+     next()
+    })
+  } else {
+   next()
+  }
+}
+
+
+/* ****************************************
+ *  Check Login
+ * ************************************ */
+Util.checkLogin = (req, res, next) => {
+  if (res.locals.loggedin) {
+    next()
+  } else {
+    req.flash("notice", "Please log in.")
+    return res.redirect("/account/login")
+  }
+}
 
 module.exports = Util
