@@ -94,7 +94,8 @@ invCont.processAddClassification = async function (req, res, next) {
  * ************************** */
 invCont.buildAddInventory = async function (req, res, next) {
   let nav = await utilities.getNav()
-  let classifications = await invModel.getClassifications()
+  let data = await invModel.getClassifications()
+  let classifications = await utilities.buildClassificationList(data)
   res.render("./inventory/add-inventory", {
     title: "Add Inventory",
     nav,

@@ -82,8 +82,8 @@ Util.buildDetailGrid = async function(data){
 /* **************************************
  * Build the classification list HTML
  * ************************************ */
-Util.buildClassificationList = async function (classification_id = null) {
-  let data = await invModel.getClassifications()
+Util.buildClassificationList = async function (data) {
+  let classification_id = data.classification_id
   let classificationList =
     '<select name="classification_id" id="classificationList" required>'
   classificationList += "<option value=''>Choose a Classification</option>"
