@@ -113,23 +113,29 @@ invCont.processAddInventory = async function (req, res, next) {
     inv_make,
     inv_model,
     inv_year,
-    inv_color,
-    inv_price,
-    inv_condition,
-    classification_id,
-    inv_thumbnail,
     inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color,
+    classification_id,
   } = req.body
+
+  let image_name = '/images/vehicles/' + inv_image
+  let thumbnail_name = '/images/vehicles/' + inv_thumbnail
+  
   const data = await invModel.insertInventory(
     inv_make,
     inv_model,
     inv_year,
-    inv_color,
+    inv_description,
+    image_name,
+    thumbnail_name,
     inv_price,
-    inv_condition,
+    inv_miles,
+    inv_color,
     classification_id,
-    inv_thumbnail,
-    inv_description
   )
   if (data.rowCount == 1) {
     req.flash(
