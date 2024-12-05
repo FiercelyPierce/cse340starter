@@ -4,14 +4,50 @@ const router = new express.Router()
 const invController = require("../controllers/invController")
 const utilities = require("../utilities/")
 
+// Route to build inventory management view
+router.get(
+  "/", 
+  utilities.handleErrors(invController.buildManagement)
+)
 // Route to build inventory by classification view
-router.get("/", utilities.handleErrors(invController.buildManagement))
-router.get("/add-classification", utilities.handleErrors(invController.buildAddClassification))
-router.post("/add-classification", utilities.handleErrors(invController.processAddClassification))
-router.get("/add-inventory", utilities.handleErrors(invController.buildAddInventory))
-router.post("/add-inventory", utilities.handleErrors(invController.processAddInventory))
-router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId));
-router.get("/detail/:invId", utilities.handleErrors(invController.buildByVehicleDetail));
-router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+router.get(
+  "/type/:classificationId", 
+  utilities.handleErrors(invController.buildByClassificationId)
+)
+// Route to build vehicle detail view
+router.get(
+  "/detail/:invId", 
+  utilities.handleErrors(invController.buildByVehicleDetail)
+)
+// Route to build add classification view
+router.get(
+  "/add-classification", 
+  utilities.handleErrors(invController.buildAddClassification)
+)
+// Route to process add classification view
+router.post(
+  "/add-classification", 
+  utilities.handleErrors(invController.processAddClassification)
+)
+// Route to build add inventory view
+router.get(
+  "/add-inventory", 
+  utilities.handleErrors(invController.buildAddInventory)
+)
+// Route to process add inventory view
+router.post(
+  "/add-inventory", 
+  utilities.handleErrors(invController.processAddInventory)
+)
+// Route to process edit inventory view
+router.get(
+  "/getInventory/:classification_id", 
+  utilities.handleErrors(invController.getInventoryJSON)
+)
+// Route to process edit inventory view
+router.get(
+  "/edit-inventory/:invId", 
+  utilities.handleErrors(invController.buildEditInventory)
+)
 
 module.exports = router;
