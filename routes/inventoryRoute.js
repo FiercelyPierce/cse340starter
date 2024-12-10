@@ -49,5 +49,10 @@ router.get(
   "/edit-inventory/:invId", 
   utilities.handleErrors(invController.buildEditInventory)
 )
+// Route to update inventory view
+router.post(
+  "/update/", 
+  utilities.handleErrors(invController.updateInventory)
+)
 
 module.exports = router;

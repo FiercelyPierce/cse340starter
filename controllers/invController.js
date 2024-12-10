@@ -43,7 +43,7 @@ invCont.buildByVehicleDetail = async function (req, res, next) {
 invCont.buildManagement = async function (req, res, next) {
   let nav = await utilities.getNav()
   let data = await invModel.getClassifications()
-  const classificationSelect = await utilities.buildClassificationList(data)
+  const classificationSelect = await utilities.buildClassificationList(data.rows)
   res.render("./inventory/management", {
     title: "Inventory Management",
     nav,
@@ -187,13 +187,14 @@ invCont.getInventoryJSON = async (req, res, next) => {
 invCont.buildEditInventory = async (req, res, next) => {
   const inv_id = parseInt(req.params.invId)
   let nav = await utilities.getNav()
-  const data = await invModel.getVehicleDetailById(inv_id)
-  const classificationSelect = await utilities.buildClassificationList(data.classification_id)
-  const itemName = `${data.inv_make} ${data.inv_model}`
+  const itemData = await invModel.getVehicleDetailById(inv_id)
+  let data = await invModel.getClassifications()
+  const classificationSelect = await utilities.buildClassificationList(data.rows)
+  const itemName = `${itemData[0].inv_make} ${itemData[0].inv_model}`
   res.render("./inventory/edit-inventory", {
     title: "Edit " + itemName,
     nav,
-    classificationSelect: classificationSelect,
+    classifications: classificationSelect,
     errors: null,
     inv_id: itemData.inv_id,
     inv_make: itemData.inv_make,

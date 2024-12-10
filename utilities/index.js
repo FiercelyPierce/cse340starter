@@ -3,6 +3,7 @@ const Util = {}
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
 
+
 /* ************************
  * Constructs the nav HTML unordered list
  ************************** */
@@ -25,6 +26,7 @@ Util.getNav = async function (req, res, next) {
   list += "</ul>"
   return list
 }
+
 
 /* **************************************
  * Build the classification view HTML
@@ -59,6 +61,7 @@ Util.buildClassificationGrid = async function(data){
   return grid
 }
 
+
 /* **************************************
  * Build the vehicle detail view HTML
  * ************************************ */
@@ -79,6 +82,7 @@ Util.buildDetailGrid = async function(data){
   return detail
 }
 
+
 /* **************************************
  * Build the classification list HTML
  * ************************************ */
@@ -87,7 +91,7 @@ Util.buildClassificationList = async function (data) {
   let classificationList =
     '<select name="classification_id" id="classificationList" required>'
   classificationList += "<option value=''>Choose a Classification</option>"
-  data.rows.forEach((row) => {
+  data.forEach((row) => {
     classificationList += '<option value="' + row.classification_id + '"'
     if (
       classification_id != null &&
@@ -100,6 +104,7 @@ Util.buildClassificationList = async function (data) {
   classificationList += "</select>"
   return classificationList
 }
+
 
 /* ****************************************
  * Middleware For Handling Errors

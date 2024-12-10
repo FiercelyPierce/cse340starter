@@ -15,7 +15,7 @@
 <% } %>
 
 <div id="container">
-  <form id="editInvForm" action="/inv/edit-inventory" method="post">
+  <form id="editInvForm" action="/inv/update" method="post">
     <div>
       <label for="classification_id">Classification</label>
       <%- classifications %>
@@ -112,5 +112,8 @@
         pattern="^[a-zA-Z]{3,50}$"
       >
     </div>
-    <button type="submit" value="Update Vehicle"></button>
+    <input type="hidden" name="inv_id"
+    <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+    <% } %>>
+    <button type="submit" value="Update Vehicle">Update Vehicle</button>
   </form>
