@@ -28,6 +28,8 @@
         name="inv_make"
         required
         pattern="^[a-zA-Z0-9]{3,50}$"
+        <% if(locals.inv_make) { %> value="<%= locals.inv_make %>"
+        <% } %>
       >
     </div>
     <div>
@@ -38,6 +40,8 @@
         name="inv_model"
         required
         pattern="^[a-zA-Z0-9]{3,50}$"
+        <% if(locals.inv_model) { %> value="<%= locals.inv_model %>"
+        <% } %>
       >
     </div>
     <div>
@@ -49,6 +53,8 @@
         required
         min="1900"
         max="2025"
+        <% if(locals.inv_year) { %> value="<%= locals.inv_year %>"
+        <% } %>
       >
     </div>
     <div>
@@ -58,26 +64,32 @@
         name="inv_description"
         required
         pattern="^[a-zA-Z0-9]{3,50}$"
+        <% if(locals.inv_description) { %> value="<%= locals.inv_description %>"
+        <% } %>
       ></textarea>
     </div>
     <div>
       <label for="inv_image">Image</label>
       <input 
-        type="file"
+        type="text"
         id="inv_image"
         name="inv_image"
         required
         accept="image/*"
+        <% if(locals.inv_image) { %> value="<%= locals.inv_image %>"
+        <% } %>
       >
     </div>
     <div>
       <label for="inv_thumbnail">Thumbnail</label>
       <input 
-        type="file"
+        type="text"
         id="inv_thumbnail"
         name="inv_thumbnail"
         required
         accept="image/*"
+        <% if(locals.inv_thumbnail) { %> value="<%= locals.inv_thumbnail %>"
+        <% } %>
       >
     </div>
     <div>
@@ -89,6 +101,8 @@
         required
         min="1"
         max="10000000"
+        <% if(locals.inv_price) { %> value="<%= locals.inv_price %>"
+        <% } %>
       >
     </div>
     <div>
@@ -100,6 +114,8 @@
         required
         min="1"
         max="10000000"
+        <% if(locals.inv_miles) { %> value="<%= locals.inv_miles %>"
+        <% } %>
       >
     </div>
     <div>
@@ -110,6 +126,8 @@
         name="inv_color"
         required
         pattern="^[a-zA-Z]{3,50}$"
+        <% if(locals.inv_color) { %> value="<%= locals.inv_color %>"
+        <% } %>
       >
     </div>
     <input type="hidden" name="inv_id"
