@@ -135,3 +135,27 @@
     <% } %>>
     <button type="submit" value="Update Vehicle">Update Vehicle</button>
   </form>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('editInvForm');
+      const submitButton = form.querySelector('button[type="submit"]');
+      const initialFormState = new FormData(form);
+
+      form.addEventListener('input', function() {
+        const currentFormState = new FormData(form);
+        let formChanged = false;
+
+        for (let [key, value] of initialFormState.entries()) {
+          if (currentFormState.get(key) !== value) {
+            formChanged = true;
+            break;
+          }
+        }
+
+        submitButton.disabled = !formChanged;
+      });
+
+      submitButton.disabled = true; // Disable submit button initially
+    });
+  </script>

@@ -52,12 +52,12 @@ router.get(
 // Route to update inventory view
 router.post(
   "/update/", 
-  utilities.handleErrors(invController.updateInventory)
+  utilities.handleErrors(invController.processUpdateInventory)
 )
 // Route to delete inventory view
 router.get(
   "/delete-inventory/:invId", 
-  utilities.handleErrors(invController.deleteInventory)
+  utilities.handleErrors(invController.buildDeleteInventory)
 )
 // Route to process delete inventory view
 router.post(
