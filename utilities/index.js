@@ -1,7 +1,8 @@
 const invModel = require("../models/inventory-model")
-const Util = {}
+const accountModel = require("../models/account-model")
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
+const Util = {}
 
 
 /* ************************
@@ -149,5 +150,37 @@ Util.checkLogin = (req, res, next) => {
     return res.redirect("/account/login")
   }
 }
+
+
+/* ****************************************
+ *  Check Admin
+ * ************************************ */
+Util.checkAdmin = (req, res, next) => {
+  const userEmail = decodeURIComponent(req.cookies.user_email);
+  const account = accountModel.getAccountByEmail(userEmail);
+  if (account.account_type === 'Admin') {
+    next();
+  } else {
+    req.flash("notice", "You do not have permission to access this page.");
+    return res.redirect("/");
+  }
+}
+
+
+/* ****************************************
+ *  Check Employee
+ * ************************************ */
+Util.checkEmployee = async (req, res, next) => {
+  const userEmail = decodeURIComponent(req.cookies.user_email);
+  const account = await accountModel.getAccountByEmail(userEmail);
+  console.log(account)
+  if (account.account_type === 'Admin' || account.account_type === 'Employee') {
+    next()
+  } else {
+    req.flash("notice", "You do not have permission to access this page.")
+    return res.redirect("/")
+  }
+}
+
 
 module.exports = Util

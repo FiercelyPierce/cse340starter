@@ -47,10 +47,12 @@ invCont.buildManagement = async function (req, res, next) {
   let nav = await utilities.getNav()
   let data = await invModel.getClassifications()
   const classificationSelect = await utilities.buildClassificationList(data.rows)
+  const accountType = utilities.checkEmployee
   res.render("./inventory/management", {
     title: "Inventory Management",
     nav,
     classificationSelect,
+    accountType,
     errors: null,
   })
 }

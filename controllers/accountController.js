@@ -10,9 +10,11 @@ require("dotenv").config()
 * *************************************** */
 async function buildManagement(req, res, next) {
   let nav = await utilities.getNav()
+  const employee = await utilities.checkEmployee();
   res.render("account/index", {
     title: "Account Management",
     nav,
+    employee,
   })
 }
 
@@ -122,6 +124,8 @@ async function accountLogin(req, res) {
       } else {
         res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
       }
+      console.log(accountData.account_email)
+      res.cookie("user_email", accountData.account_email) // Save value to cookie
       return res.redirect("/account/")
     }
   } catch (error) {
