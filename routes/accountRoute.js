@@ -1,9 +1,9 @@
-// Needed Resources 
 const express = require("express")
 const router = new express.Router() 
 const utilities = require("../utilities/")
 const accountController = require("../controllers/accountController")
 const regValidate = require('../utilities/account-validation')
+
 
 // Route to build account view
 router.get(
@@ -37,9 +37,18 @@ router.get(
 )
 router.post(
   "/update",
-  // regValidate.updateRules(),
-  // regValidate.checkUpdateData,
+  regValidate.updateRules(),
+  regValidate.checkUpdateData,
   utilities.handleErrors(accountController.updateAccount)
 )
+router.get(
+  "/logout",
+  utilities.handleErrors(accountController.buildLogout)
+)
+router.post(
+  "/logout",
+  utilities.handleErrors(accountController.accountLogout)
+)
+
 
 module.exports = router;

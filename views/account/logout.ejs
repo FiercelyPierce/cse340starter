@@ -1,0 +1,13 @@
+<% if (title) { %>
+  <h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<%- messages() %>
+
+<h2>Are you sure you want to logout?</h2>
+
+<form id="logoutForm" action="/account/logout" method="post">
+  <button type="submit" value="Logout">Logout</button>
+</form>

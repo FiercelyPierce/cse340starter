@@ -171,14 +171,19 @@ Util.checkAdmin = (req, res, next) => {
  *  Check Employee
  * ************************************ */
 Util.checkEmployee = async (req, res, next) => {
-  const userEmail = decodeURIComponent(req.cookies.user_email);
-  const account = await accountModel.getAccountByEmail(userEmail);
-  console.log(account)
-  if (account.account_type === 'Admin' || account.account_type === 'Employee') {
-    next()
+  if (req.cookies.user_email) {
+    const userEmail = decodeURIComponent(req.cookies.user_email);
+    const account = await accountModel.getAccountByEmail(userEmail);
+    console.log(account.account_type)
+    if (account.account_type === 'Admin' || account.account_type === 'Employee') {
+      next()
+    } else {
+      req.flash("notice", "You do not have permission to access this page.")
+      return res.redirect("/")
+    }
   } else {
-    req.flash("notice", "You do not have permission to access this page.")
-    return res.redirect("/")
+    req.flash("notice", "Please log in.")
+    return res.redirect("/account/login")
   }
 }
 
